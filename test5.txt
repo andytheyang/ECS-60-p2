@@ -1,0 +1,20 @@
+Leaf: 10 24 53 67 
+Inserting 57. 
+Leaf: 10 24 53 67 
+Inserting 40. 
+Leaf: 10 24 53 67 
+Inserting 18. 
+Leaf: 10 24 53 67 
+Inserting 44. 
+Leaf: 10 24 53 67 
+Inserting 65. 
+Leaf: 10 24 53 67 
+Inserting 35. 
+Leaf: 10 24 53 67 
+Inserting 13. 
+Leaf: 10 24 53 67 
+Inserting 1. 
+Leaf: 10 24 53 67 
+Inserting 9. 
+Leaf: 10 24 53 67 
+Leaf: 10 24 53 67 

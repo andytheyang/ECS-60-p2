@@ -1,0 +1,20 @@
+Leaf: 3 4 
+Inserting 1. 
+Leaf: 3 4 
+Inserting 10. 
+Leaf: 3 4 
+Inserting 2. 
+Leaf: 3 4 
+Inserting 6. 
+Leaf: 3 4 
+Inserting 9. 
+Leaf: 3 4 
+Inserting 11. 
+Leaf: 3 4 
+Inserting 12. 
+Leaf: 3 4 
+Inserting 5. 
+Leaf: 3 4 
+Inserting 7. 
+Leaf: 3 4 
+Leaf: 3 4 
