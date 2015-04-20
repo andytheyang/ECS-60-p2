@@ -1,9 +1,15 @@
+// Author: Andy Yang
+// Author: Manvinder Sodhi
+//#define NDEBUG
+
 #include <iostream>
+#include <cassert>
 #include "BTree.h"
 #include "BTreeNode.h"
 #include "LeafNode.h"
 #include "InternalNode.h"
 using namespace std;
+
 
 BTree::BTree(int ISize, int LSize):internalSize(ISize), leafSize(LSize)
 {
@@ -13,6 +19,14 @@ BTree::BTree(int ISize, int LSize):internalSize(ISize), leafSize(LSize)
 
 void BTree::insert(const int value)
 {
+  LeafNode *target = dynamic_cast<LeafNode *> (root);
+
+  if (target)  // is a LeafNode
+  {
+    LeafNode *split = target->insert(value);
+    // deal with split
+    assert(split == NULL);
+  }
   // students must write this
 } // BTree::insert()
 
