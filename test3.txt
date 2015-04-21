@@ -7,5 +7,5 @@ Leaf: 1 2 3
 Inserting 4. 
 Leaf: 1 2 3 4 
 Inserting 5. 
-Leaf: 1 2 3 4 
-Leaf: 1 2 3 4 
+Internal: 
+Internal: 

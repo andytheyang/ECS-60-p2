@@ -1,20 +1,20 @@
-Leaf: 3 4 
+Internal: 
 Inserting 1. 
-Leaf: 3 4 
+Internal: 
 Inserting 10. 
-Leaf: 3 4 
+Internal: 
 Inserting 2. 
-Leaf: 3 4 
+Internal: 
 Inserting 6. 
-Leaf: 3 4 
+Internal: 
 Inserting 9. 
-Leaf: 3 4 
+Internal: 
 Inserting 11. 
-Leaf: 3 4 
+Internal: 
 Inserting 12. 
-Leaf: 3 4 
+Internal: 
 Inserting 5. 
-Leaf: 3 4 
+Internal: 
 Inserting 7. 
-Leaf: 3 4 
-Leaf: 3 4 
+Internal: 
+Internal: 

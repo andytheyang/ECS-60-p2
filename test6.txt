@@ -3,9 +3,9 @@ Leaf: 3
 Inserting 2. 
 Leaf: 2 3 
 Inserting 1. 
-Leaf: 2 3 
+Internal: 
 Inserting 4. 
-Leaf: 2 3 
+Internal: 
 Inserting 5. 
-Leaf: 2 3 
-Leaf: 2 3 
+Internal: 
+Internal: 

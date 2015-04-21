@@ -2,19 +2,19 @@ Leaf: 3 4 8
 Inserting 1. 
 Leaf: 1 3 4 8 
 Inserting 10. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 2. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 6. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 9. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 11. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 12. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 5. 
-Leaf: 1 3 4 8 
+Internal: 
 Inserting 7. 
-Leaf: 1 3 4 8 
-Leaf: 1 3 4 8 
+Internal: 
+Internal: 

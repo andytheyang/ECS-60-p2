@@ -5,7 +5,13 @@
 
 class LeafNode:public BTreeNode
 {
+private:
   int *values;
+  int transferSize;
+  int halfSize;
+  void sortInsert(int value);
+  bool lazyInsert(int value);	// returns true if inserted
+  LeafNode* splitInsert(int value);
 public:
   LeafNode(int LSize, InternalNode *p, BTreeNode *left,
     BTreeNode *right);

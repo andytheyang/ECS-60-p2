@@ -1,20 +1,20 @@
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 57. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 40. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 18. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 44. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 65. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 35. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 13. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 1. 
-Leaf: 10 24 53 67 
+Internal: 
 Inserting 9. 
-Leaf: 10 24 53 67 
-Leaf: 10 24 53 67 
+Internal: 
+Internal: 
