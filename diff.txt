@@ -1,42 +1,4 @@
-1,20c1,20
-< Internal: 37 56 
-< Internal: 1 18 
-< Internal: 37 
-< Internal: 56 67 
-< Leaf: 1 8 9 10 12 13 
-< Leaf: 18 22 24 27 30 35 
-< Leaf: 37 40 44 47 53 54 
-< Leaf: 56 57 65 
-< Leaf: 67 69 80 81 
-< Internal: 1 37 
-< Internal: 1 
-< Internal: 37 56 
-< Internal: 1 18 
-< Internal: 37 
-< Internal: 56 67 
-< Leaf: 1 8 9 10 12 13 
-< Leaf: 18 22 24 27 30 35 
-< Leaf: 37 40 44 47 53 54 
-< Leaf: 56 57 65 
-< Leaf: 67 69 80 81 
----
-> Internal: 
-> Inserting 57. 
-> Internal: 
-> Inserting 40. 
-> Internal: 
-> Inserting 18. 
-> Internal: 
-> Inserting 44. 
-> Internal: 
-> Inserting 65. 
-> Internal: 
-> Inserting 35. 
-> Internal: 
-> Inserting 13. 
-> Internal: 
-> Inserting 1. 
-> Internal: 
-> Inserting 9. 
-> Internal: 
-> Internal: 
+3,5d2
+< Inserting 1. 
+< Leaf: 1 2 
+< Leaf: 1 2 

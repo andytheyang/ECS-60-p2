@@ -23,6 +23,14 @@ int InternalNode::getMinimum()const
 
 InternalNode* InternalNode::insert(int value)
 {
+  int i;
+
+  for (i = count; i > 0 && value < keys[i - 1]; i--)
+    keys[i] = keys[i - 1];  // move one space down
+
+  keys[i] = value;
+  count++;
+
   // students must write this
   return NULL; // to avoid warnings for now.
 } // InternalNode::insert()
@@ -48,7 +56,6 @@ void InternalNode::print(Queue <BTreeNode*> &queue)
 
   for(i = 0; i < count; i++)
     queue.enqueue(children[i]);
-
 } // InternalNode::print()
 
 

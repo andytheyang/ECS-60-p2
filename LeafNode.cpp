@@ -1,5 +1,6 @@
 // Author: Andy Yang
 #include <iostream>
+#include <cassert>
 #include "LeafNode.h"
 #include "InternalNode.h"
 #include "QueueAr.h"
@@ -14,13 +15,12 @@ LeafNode::LeafNode(int LSize, InternalNode *p,
 
   if (LSize % 2 == 0)	// even number
   {
+    // TODO: fix transferSize for odd L
     transferSize = LSize / 2;
-    halfSize = transferSize + 1;
   }  // if LSize is even
   else	// if LSize is odd
   {
     transferSize = LSize / 2;
-    halfSize = transferSize;
   }  // else
 }  // LeafNode()
 
@@ -49,7 +49,24 @@ void LeafNode::sortInsert(int value)
 
 bool LeafNode::lazyInsert(int value)
 {
+  // TODO: remove this
+  return false;
   // TODO: implement this
+  LeafNode *left = dynamic_cast<LeafNode *> (leftSibling);
+
+  if (left)  // leftNode exists
+  {
+    
+  }  // exists
+  else  // if not (this is the leftmost node)
+  {
+    LeafNode *right = dynamic_cast<LeafNode *> (rightSibling);
+
+    if (!right)
+      return false;	// will only happen if this is root LeafNode
+
+    
+  }
   // TODO: updatekeys()
   // TODO: count++;
   return false;	// simulate failure to lazy insert
@@ -57,17 +74,17 @@ bool LeafNode::lazyInsert(int value)
 
 LeafNode* LeafNode::splitInsert(int value)
 {
-//  LeafNode *splitNode = NULL;	// placeholder
   LeafNode *splitNode = new LeafNode(leafSize, NULL, this, NULL);
-  // TODO: move elements to splitNode
   // TODO: garbage cleanup?
   for (int i = 1; i <= transferSize; i++)
   {
-    splitNode->sortInsert(values[--count]);	// add greatest half
+    splitNode->sortInsert(values[count - 1]);	// add greatest half
+    count--;
   }  // for transferSize
 
   sortInsert(value);
-  splitNode->sortInsert(values[--count]);
+  splitNode->sortInsert(values[count - 1]);
+  count--;
 
   return splitNode;
 }  // splitInsert() inserts when split is needed
@@ -78,6 +95,9 @@ LeafNode* LeafNode::insert(int value)
     sortInsert(value);		// perform regular insert
   else if (!lazyInsert(value))	// attempt lazy insert
     return splitInsert(value);	// if it fails, split (last resort)
+
+  if (parent)
+    count--;
 
   return NULL; // if insert without split (lazy or regular)
 }  // LeafNode::insert()

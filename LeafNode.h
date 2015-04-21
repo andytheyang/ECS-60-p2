@@ -7,8 +7,7 @@ class LeafNode:public BTreeNode
 {
 private:
   int *values;
-  int transferSize;
-  int halfSize;
+  int transferSize;	// for split
   void sortInsert(int value);
   bool lazyInsert(int value);	// returns true if inserted
   LeafNode* splitInsert(int value);
