@@ -19,25 +19,18 @@ BTree::BTree(int ISize, int LSize):internalSize(ISize), leafSize(LSize)
 
 void BTree::insert(const int value)
 {
-  LeafNode *target = dynamic_cast<LeafNode *> (root);
+  BTreeNode *split = root->insert(value);
 
-  if (target)  // is a LeafNode
+  if (split)	// LeafNode needs split
   {
-    LeafNode *split = target->insert(value);
-
-    if (split)	// LeafNode needs split
-    {
-      InternalNode *parent = new InternalNode(internalSize, leafSize, NULL,
+    InternalNode *parent = new InternalNode(internalSize, leafSize, NULL,
                                               NULL, NULL);
-      target->setParent(parent);	// set parents to root
-      split->setParent(parent);
-      parent->insert(target);	// should be on the left
-      parent->insert(split);	// should be on the right
-      root = parent;
-    }  // if split needed
-  }  // if target is a LeafNode
-  else
-    root->insert(value);
+    root->setParent(parent);	// set parents to root
+    split->setParent(parent);
+    parent->insert(root);	// should be on the left
+    parent->insert(split);	// should be on the right
+    root = parent;
+  }  // if split needed
 } // BTree::insert()
 
 

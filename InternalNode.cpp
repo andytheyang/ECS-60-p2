@@ -22,8 +22,33 @@ int InternalNode::getMinimum()const
 } // InternalNode::getMinimum()
 
 
+BTreeNode* InternalNode::findLoc(int value)
+{
+  int i = -1;
+  bool found = false;
+
+  while(!found)
+  {
+    i++;
+    if (i == 0 && value < keys[i])
+      found = true;
+    else if (i == count && value >= keys[i - 1])
+      found = true;
+    else if (value >= keys[i - 1] && value < keys[i])
+      found = true;
+  }  // while not found
+
+  cout << "Location: " << i << endl;
+  return children[i];
+}  // findloc()
+
 InternalNode* InternalNode::insert(int value)
 {
+  // TODO: deal with self-splitting
+  BTreeNode *target = findLoc(value);
+  BTreeNode *split = target->insert(value);
+  // TODO: deal with splitting children
+
   // students must write this
   return NULL; // to avoid warnings for now.
 } // InternalNode::insert()

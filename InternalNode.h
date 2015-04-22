@@ -8,6 +8,7 @@ class InternalNode:public BTreeNode
   int internalSize;
   BTreeNode **children;
   int *keys;
+  BTreeNode *findLoc(int value);
 public:
   InternalNode(int ISize, int LSize, InternalNode *p,
     BTreeNode *left, BTreeNode *right);

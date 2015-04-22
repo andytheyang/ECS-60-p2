@@ -52,6 +52,7 @@ bool LeafNode::lazyInsert(int value)
   // TODO: remove this
   return false;
   // TODO: implement this
+  // TODO: fix casting
   LeafNode *left = dynamic_cast<LeafNode *> (leftSibling);
 
   if (left)  // leftNode exists
