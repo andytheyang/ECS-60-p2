@@ -31,8 +31,6 @@ void BTree::insert(const int value)
       InternalNode *parent = new InternalNode(internalSize, leafSize, NULL,
                                               NULL, NULL);
       // TODO: split LeafNode
-      parent->insert(target->getMinimum());
-      parent->insert(split->getMinimum());
       target->setParent(parent);	// set parents to root
       split->setParent(parent);
       parent->insert(target);	// should be on the left
@@ -42,7 +40,7 @@ void BTree::insert(const int value)
   }  // if target is a LeafNode
   else
   {
-    assert(false);
+//    assert(false);
 
     InternalNode *target = dynamic_cast<InternalNode *> (root);
     assert(target);	// must be InternalNode if not LeafNode

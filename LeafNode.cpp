@@ -105,6 +105,7 @@ LeafNode* LeafNode::insert(int value)
 void LeafNode::print(Queue <BTreeNode*> &queue)
 {
   cout << "Leaf: ";
+
   for (int i = 0; i < count; i++)
     cout << values[i] << ' ';
   cout << endl;

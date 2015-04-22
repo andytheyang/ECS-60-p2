@@ -1,3 +1,5 @@
 Inserting 1. 
-Leaf: 1 
-Leaf: 1 
+Leaf: Count: 1
+1 
+Leaf: Count: 1
+1 

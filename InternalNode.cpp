@@ -1,3 +1,4 @@
+#include <cassert>
 #include <iostream>
 #include "InternalNode.h"
 
@@ -23,14 +24,6 @@ int InternalNode::getMinimum()const
 
 InternalNode* InternalNode::insert(int value)
 {
-  int i;
-
-  for (i = count; i > 0 && value < keys[i - 1]; i--)
-    keys[i] = keys[i - 1];  // move one space down
-
-  keys[i] = value;
-  count++;
-
   // students must write this
   return NULL; // to avoid warnings for now.
 } // InternalNode::insert()
@@ -42,6 +35,18 @@ void InternalNode::insert(BTreeNode *oldRoot, BTreeNode *node2)
 
 void InternalNode::insert(BTreeNode *newNode) // from a sibling
 {
+  int i;
+  int newKey = newNode->getMinimum();
+
+  for (i = count; i > 0 && newKey < keys[i - 1]; i--)
+  {
+    children[i] = children[i - 1];  // move one space down
+    keys[i] = keys[i - 1];  // move one space down
+  }  // semiinsertion sort
+
+  children[i] = newNode;
+  keys[i] = newKey;
+  count++;
   // students may write this
 } // InternalNode::insert()
 
