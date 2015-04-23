@@ -11,6 +11,9 @@ private:
   void sortInsert(int value);
   bool lazyInsert(int value);	// returns true if inserted
   LeafNode* splitInsert(int value);
+  int popMin();
+  int popMax();
+  void updateKeys();
 public:
   LeafNode(int LSize, InternalNode *p, BTreeNode *left,
     BTreeNode *right);

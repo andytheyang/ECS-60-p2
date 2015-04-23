@@ -21,24 +21,24 @@ int InternalNode::getMinimum()const
     return 0;
 } // InternalNode::getMinimum()
 
-
+// returns location to insert
 BTreeNode* InternalNode::findLoc(int value)
 {
-  int i = -1;
+  int i = 0;
   bool found = false;
 
   while(!found)
   {
-    i++;
     if (i == 0 && value < keys[i])
-      found = true;
-    else if (i == count && value >= keys[i - 1])
-      found = true;
-    else if (value >= keys[i - 1] && value < keys[i])
-      found = true;
+      break;
+    else if (i == (count - 1) && value >= keys[i])
+      break;
+    else if (value >= keys[i] && value < keys[i + 1])
+      break;
+
+    i++;
   }  // while not found
 
-  cout << "Location: " << i << endl;
   return children[i];
 }  // findloc()
 
@@ -89,3 +89,15 @@ void InternalNode::print(Queue <BTreeNode*> &queue)
 } // InternalNode::print()
 
 
+void InternalNode::updateKeys()
+{
+  // TODO: don't call above if min isn't changed
+  for (int i = 0; i < count; i++)
+  {
+    if (keys[i] != children[i]->getMinimum())
+      keys[i] = children[i]->getMinimum();
+  }
+
+  if (parent)
+    parent->updateKeys();
+}

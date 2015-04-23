@@ -36,8 +36,33 @@ int LeafNode::getMinimum()const
 } // LeafNode::getMinimum()
 
 
+int LeafNode::popMin()
+{
+  int ret = getMinimum();
+
+  for(int i = 0; i < count - 1; i++)
+    values[i] = values[i + 1];
+
+  count--;
+  updateKeys();
+  return ret;
+}  // popLeft()
+
+int LeafNode::popMax()
+{
+  count--;
+  return values[count];
+}  // popRight()
+
+void LeafNode::updateKeys()
+{
+  // TODO: implement update
+  parent->updateKeys();
+}  // updatekeys
+
 void LeafNode::sortInsert(int value)
 {
+  // TODO: implement updatekeys() for min
   int i;
 
   for (i = count; i > 0 && value < values[i - 1]; i--)
@@ -49,27 +74,26 @@ void LeafNode::sortInsert(int value)
 
 bool LeafNode::lazyInsert(int value)
 {
-  // TODO: remove this
-  return false;
   // TODO: implement this
-  // TODO: fix casting
-  LeafNode *left = dynamic_cast<LeafNode *> (leftSibling);
-
-  if (left)  // leftNode exists
+  if (leftSibling && leftSibling->getCount() < leafSize)	// has space
   {
-    
-  }  // exists
-  else  // if not (this is the leftmost node)
+    leftSibling->insert(popMin());
+    sortInsert(value);
+    return true;
+  }  // leftSibling has space
+  else if (rightSibling && rightSibling->getCount() < leafSize)
   {
-    LeafNode *right = dynamic_cast<LeafNode *> (rightSibling);
+    if (value >= values[count - 1])	// greater than max
+    {
+      rightSibling->insert(value);
+      return true;
+    }
 
-    if (!right)
-      return false;	// will only happen if this is root LeafNode
+    rightSibling->insert(popMax());
+    sortInsert(value);
+    return true;
+  }  // rightSibling has space
 
-    
-  }
-  // TODO: updatekeys()
-  // TODO: count++;
   return false;	// simulate failure to lazy insert
 }  // lazyInsert()
 
@@ -96,9 +120,6 @@ LeafNode* LeafNode::insert(int value)
     sortInsert(value);		// perform regular insert
   else if (!lazyInsert(value))	// attempt lazy insert
     return splitInsert(value);	// if it fails, split (last resort)
-
-  if (parent)
-    count--;
 
   return NULL; // if insert without split (lazy or regular)
 }  // LeafNode::insert()
