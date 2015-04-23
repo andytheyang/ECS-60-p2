@@ -57,12 +57,14 @@ int LeafNode::popMax()
 void LeafNode::updateKeys()
 {
   // TODO: implement update
-  parent->updateKeys();
+  if (parent)
+    parent->updateKeys();
 }  // updatekeys
 
 void LeafNode::sortInsert(int value)
 {
-  // TODO: implement updatekeys() for min
+  bool update = value < getMinimum();
+
   int i;
 
   for (i = count; i > 0 && value < values[i - 1]; i--)
@@ -70,6 +72,9 @@ void LeafNode::sortInsert(int value)
 
   values[i] = value;
   count++;
+
+  if (update)
+    updateKeys();
 }  // sortInsert() inserts if there is space
 
 bool LeafNode::lazyInsert(int value)
@@ -99,8 +104,13 @@ bool LeafNode::lazyInsert(int value)
 
 LeafNode* LeafNode::splitInsert(int value)
 {
-  LeafNode *splitNode = new LeafNode(leafSize, NULL, this, NULL);
-  // TODO: garbage cleanup?
+  LeafNode *splitNode = new LeafNode(leafSize, parent, this, rightSibling);
+
+  if (rightSibling)
+    rightSibling->setLeftSibling(splitNode);
+
+  setRightSibling(splitNode);
+
   for (int i = 1; i <= transferSize; i++)
   {
     splitNode->sortInsert(values[count - 1]);	// add greatest half

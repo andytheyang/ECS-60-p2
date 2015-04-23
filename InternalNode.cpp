@@ -10,6 +10,7 @@ InternalNode::InternalNode(int ISize, int LSize,
 {
   keys = new int[internalSize]; // keys[i] is the minimum of children[i]
   children = new BTreeNode* [ISize];
+  transferSize = ISize / 2;
 } // InternalNode::InternalNode()
 
 
@@ -49,14 +50,25 @@ InternalNode* InternalNode::insert(int value)
   BTreeNode *split = target->insert(value);
   // TODO: deal with splitting children
 
-  // students must write this
-  return NULL; // to avoid warnings for now.
+  if (split)
+  {
+    if (count < internalSize)         // if there is space
+      sortInsert(split);          // perform regular insert
+    else if (!lazyInsert(split))  // attempt lazy insert 
+    {
+      return splitInsert(split);  // if it fails, split (last resort)
+    }
+  }
+
+  return NULL; // if insert without split (lazy or regular)
 } // InternalNode::insert()
+
 
 void InternalNode::insert(BTreeNode *oldRoot, BTreeNode *node2)
 { // Node must be the root, and node1
   // students must write this
 } // InternalNode::insert()
+
 
 void InternalNode::insert(BTreeNode *newNode) // from a sibling
 {
@@ -101,3 +113,104 @@ void InternalNode::updateKeys()
   if (parent)
     parent->updateKeys();
 }
+
+BTreeNode* InternalNode::popMin()
+{
+  BTreeNode *ret = children[0];
+
+  for(int i = 0; i < count - 1; i++)
+  {
+    keys[i] = keys[i + 1];
+    children[i] = children[i + 1];
+  }
+
+  count--;
+  updateKeys();
+  return ret;
+}  // popLeft()
+
+BTreeNode* InternalNode::popMax()
+{
+  count--;
+  return children[count];
+}  // popRight()
+
+void InternalNode::sortInsert(BTreeNode *value)
+{
+  // TODO: implement updatekeys() for min
+  int i;
+
+  for (i = count; i > 0 && value->getMinimum() < children[i - 1]->getMinimum(); i--)
+  {
+    children[i] = children[i - 1];
+    keys[i] = keys[i - 1];  // move one space down 
+  }
+
+  keys[i] = value->getMinimum();
+  children[i] = value;
+  count++;
+}  // sortInsert() inserts if there is space
+
+bool InternalNode::lazyInsert(BTreeNode *value)
+{
+  // TODO: implement this
+  if (leftSibling && leftSibling->getCount() < internalSize)        // has space
+  {
+    InternalNode *left = dynamic_cast<InternalNode *> (leftSibling);
+    assert(left);
+
+    left->insert(popMin());
+    sortInsert(value);
+    return true;
+  }  // leftSibling has space
+  else if (rightSibling && rightSibling->getCount() < internalSize)
+  {
+    InternalNode *right = dynamic_cast<InternalNode *> (rightSibling);
+    assert(right);
+
+    if (value->getMinimum() >= children[count - 1]->getMinimum())     // greater than max
+    {
+      right->insert(value);
+      return true;
+    }
+
+    right->insert(popMax());
+    sortInsert(value);
+    return true;
+  }  // rightSibling has space
+
+  return false; // simulate failure to lazy insert
+}  // lazyInsert()
+
+InternalNode* InternalNode::splitInsert(BTreeNode *value)
+{
+  InternalNode *splitNode = new InternalNode(internalSize, leafSize, parent, this, rightSibling);
+
+  if (rightSibling)
+    rightSibling->setLeftSibling(splitNode);
+
+  setRightSibling(splitNode);
+  for (int i = 1; i <= transferSize; i++)
+  {
+    splitNode->sortInsert(children[count - 1]);   // add greatest half
+    count--;
+  }  // for transferSize
+
+  sortInsert(value);
+  splitNode->sortInsert(children[count - 1]);
+  count--;
+
+  return splitNode;
+}  // splitInsert() inserts when split is needed
+
+/*
+InternalNode* InternalNode::insert()
+{
+  if (count < leafSize)         // if there is space
+    sortInsert(value);          // perform regular insert
+  else if (!lazyInsert(value))  // attempt lazy insert 
+    return splitInsert(value);  // if it fails, split (last resort)
+
+  return NULL; // if insert without split (lazy or regular)
+}  // LeafNode::insert()
+*/

@@ -6,9 +6,15 @@
 class InternalNode:public BTreeNode
 {
   int internalSize;
+  int transferSize;
   BTreeNode **children;
   int *keys;
   BTreeNode *findLoc(int value);
+  void sortInsert(BTreeNode *value);
+  bool lazyInsert(BTreeNode *value);   // returns true if inserted
+  InternalNode* splitInsert(BTreeNode *value);
+  BTreeNode* popMin();
+  BTreeNode* popMax();
 public:
   InternalNode(int ISize, int LSize, InternalNode *p,
     BTreeNode *left, BTreeNode *right);
