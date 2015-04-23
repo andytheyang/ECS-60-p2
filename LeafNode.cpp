@@ -121,6 +121,8 @@ LeafNode* LeafNode::splitInsert(int value)
   splitNode->sortInsert(values[count - 1]);
   count--;
 
+  // TODO: remove this
+  updateKeys();
   return splitNode;
 }  // splitInsert() inserts when split is needed
 
@@ -131,6 +133,8 @@ LeafNode* LeafNode::insert(int value)
   else if (!lazyInsert(value))	// attempt lazy insert
     return splitInsert(value);	// if it fails, split (last resort)
 
+  // TODO: remove this
+  updateKeys();
   return NULL; // if insert without split (lazy or regular)
 }  // LeafNode::insert()
 

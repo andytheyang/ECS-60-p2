@@ -82,6 +82,9 @@ void InternalNode::insert(BTreeNode *newNode) // from a sibling
   children[i] = newNode;
   keys[i] = newKey;
   count++;
+
+  // TODO: remove this
+  updateKeys();
   // students may write this
 } // InternalNode::insert()
 
@@ -135,7 +138,7 @@ BTreeNode* InternalNode::popMax()
 
 void InternalNode::sortInsert(BTreeNode *value)
 {
-  bool update = value->getMinimum() < getMinimum();
+//  bool update = value->getMinimum() < getMinimum();
   int i;
 
   for (i = count; i > 0 && value->getMinimum() < children[i - 1]->getMinimum(); i--)
@@ -190,6 +193,7 @@ InternalNode* InternalNode::splitInsert(BTreeNode *value)
     rightSibling->setLeftSibling(splitNode);
 
   setRightSibling(splitNode);
+
   for (int i = 1; i <= transferSize; i++)
   {
     splitNode->sortInsert(children[count - 1]);   // add greatest half
@@ -200,6 +204,8 @@ InternalNode* InternalNode::splitInsert(BTreeNode *value)
   splitNode->sortInsert(children[count - 1]);
   count--;
 
+  // TODO: remove this
+  updateKeys();
   return splitNode;
 }  // splitInsert() inserts when split is needed
 
