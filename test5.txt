@@ -1,5 +1,5 @@
 Internal: 13 27 
-Internal: 47 54 67 
+Internal: 40 54 67 
 Leaf: 1 8 
 Leaf: 9 10 12 
 Leaf: 13 18 22 24 
@@ -10,7 +10,7 @@ Leaf: 67 69 80 81
 Internal: 1 13 40 
 Internal: 1 9 
 Internal: 13 27 
-Internal: 47 54 67 
+Internal: 40 54 67 
 Leaf: 1 8 
 Leaf: 9 10 12 
 Leaf: 13 18 22 24 

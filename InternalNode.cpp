@@ -57,7 +57,7 @@ InternalNode* InternalNode::insert(int value)
       return splitInsert(split);  // if it fails, split (last resort)
     }
   }
-
+  updateKeys(); 
   return NULL; // if insert without split (lazy or regular)
 } // InternalNode::insert()
 
