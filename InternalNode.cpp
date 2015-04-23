@@ -45,10 +45,8 @@ BTreeNode* InternalNode::findLoc(int value)
 
 InternalNode* InternalNode::insert(int value)
 {
-  // TODO: deal with self-splitting
   BTreeNode *target = findLoc(value);
   BTreeNode *split = target->insert(value);
-  // TODO: deal with splitting children
 
   if (split)
   {
@@ -137,7 +135,7 @@ BTreeNode* InternalNode::popMax()
 
 void InternalNode::sortInsert(BTreeNode *value)
 {
-  // TODO: implement updatekeys() for min
+  bool update = value->getMinimum() < getMinimum();
   int i;
 
   for (i = count; i > 0 && value->getMinimum() < children[i - 1]->getMinimum(); i--)
@@ -149,11 +147,13 @@ void InternalNode::sortInsert(BTreeNode *value)
   keys[i] = value->getMinimum();
   children[i] = value;
   count++;
+
+//  if (update)
+    updateKeys();
 }  // sortInsert() inserts if there is space
 
 bool InternalNode::lazyInsert(BTreeNode *value)
 {
-  // TODO: implement this
   if (leftSibling && leftSibling->getCount() < internalSize)        // has space
   {
     InternalNode *left = dynamic_cast<InternalNode *> (leftSibling);
